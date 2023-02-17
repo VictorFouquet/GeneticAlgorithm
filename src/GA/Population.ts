@@ -43,7 +43,7 @@ export abstract class Population<T extends Individual<any>>
     abstract evaluate(): T[]
 
     /**
-     * Must implement the mutation of the function.
+     * Must implement the mutation of the population.
      * Mutation is used to explore the solutions' search space
      */
     abstract mutate(): T[]
