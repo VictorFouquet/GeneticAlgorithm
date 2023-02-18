@@ -57,7 +57,10 @@ export class PopulationTS extends Population<IndividualTS> {
                 )
             }
             // Adds the distance from last to first city that closes the loop
-            this.individuals[i].fitness += this.getDistance(0, this.individualSize-1);
+            this.individuals[i].fitness += this.getDistance(
+                this.individuals[i].genes[0],
+                this.individuals[i].genes[this.individualSize-1]
+            )
             // Adds individual fitness to average
             this.averageFitness += this.individuals[i].fitness;
         }

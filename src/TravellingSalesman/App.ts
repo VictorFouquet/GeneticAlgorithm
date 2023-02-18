@@ -24,7 +24,7 @@ export class App {
     /** Creates cities with random coordinates in canvas limits */
     createCities(): void {
         this.cities = []
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < this.cityCount; i++) {
             this.cities.push([
                 Math.floor(Math.random() * this.renderer.canvas.width),
                 Math.floor(Math.random() * this.renderer.canvas.height)
