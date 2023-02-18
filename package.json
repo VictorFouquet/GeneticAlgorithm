@@ -1,6 +1,6 @@
 {
   "name": "genetic-algorithm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides genetic algorithms' population and individual base classes",
   "main": "index.js",
   "scripts": {
