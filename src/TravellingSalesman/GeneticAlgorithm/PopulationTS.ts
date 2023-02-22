@@ -3,7 +3,7 @@ import { IndividualTS } from "./IndividualTS";
 
 
 /**
- * Population representing solutions to the Traveling Salesman Problem
+ * Population representing solutions to the Travelling Salesman Problem
  */
 export class PopulationTS extends Population<IndividualTS> {
     cities: number[][];
