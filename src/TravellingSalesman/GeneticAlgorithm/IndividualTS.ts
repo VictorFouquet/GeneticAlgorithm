@@ -1,4 +1,4 @@
-import { Individual } from "../GA/index";
+import { Individual } from "../../GA/index";
 
 
 /**
