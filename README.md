@@ -29,7 +29,7 @@ Populations use individuals so some of its methods must also be implemented in c
 
 Provided example that extends both ```Population``` and ```Individual``` abstract classes to solve the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem)
 
-The solutions evolution and resolution of the problem can be interactively vizualised by opening the ```index.html``` file located in the repository's root folder.
+The solutions evolution and resolution of the problem can be interactively vizualised by opening the ```index.html``` file located in the repository's root folder, or online hosted on [codepen](https://codepen.io/victorfouquet/full/oNPLvoG).
 
 ## Development
 
