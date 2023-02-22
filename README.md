@@ -2,7 +2,7 @@
 
 Provides Genetic Algorithm base classes and interfaces.
 
-Genetic algorithms are used to solved problems that can be too hard or too expensive to solve in a deterministic way.
+Genetic algorithms are used to tackle problems that can be too hard or too expensive to solve in a deterministic way.
 
 Their purpose is to mimic natural selection principles, by evolving a set of randomly generated solutions untill an optimal or almost optimal solution to the given problem does emerge.
 
