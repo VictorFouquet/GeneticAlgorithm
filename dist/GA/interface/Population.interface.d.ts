@@ -20,8 +20,11 @@ export interface _Population<T extends _Individual<any>> {
     individuals: T[];
     individualCount: number;
     individualSize: number;
+    mutationRate: number;
+    generation: number;
     bestFitness: number;
     averageFitness: number;
+    averageFitnesses: number[];
     IndividualClass: {
         new (): T;
     };

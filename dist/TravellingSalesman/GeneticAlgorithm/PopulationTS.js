@@ -1,7 +1,7 @@
-import { Population } from "../GA/index";
+import { Population } from "../../GA/index";
 import { IndividualTS } from "./IndividualTS";
 /**
- * Population representing solutions to the Traveling Salesman Problem
+ * Population representing solutions to the Travelling Salesman Problem
  */
 export class PopulationTS extends Population {
     /**
@@ -9,9 +9,13 @@ export class PopulationTS extends Population {
      * @param individualCount Number of individuals in the population
      * @param cities Set of cities coordinates to visit
      */
-    constructor(individualCount, cities) {
-        super(individualCount, cities.length, IndividualTS);
+    constructor(individualCount, cities, mutationRate) {
+        super(individualCount, cities.length, mutationRate, IndividualTS);
         this.cities = cities;
+        this.bestFitness = -Infinity;
+        this.previousBestFitness = -Infinity;
+        this.noImprovementCount = 0;
+        this.averageFitnesses = [];
     }
     /**
      * Computes distance between two cities
@@ -36,6 +40,8 @@ export class PopulationTS extends Population {
      */
     evaluate() {
         this.averageFitness = 0;
+        this.previousBestFitness = this.bestFitness;
+        this.bestFitness = -Infinity;
         for (let i = 0; i < this.individuals.length; i++) {
             this.individuals[i].fitness = 0;
             // Sums distances between cities according to individual's genes
@@ -46,9 +52,18 @@ export class PopulationTS extends Population {
             this.individuals[i].fitness += this.getDistance(this.individuals[i].genes[0], this.individuals[i].genes[this.individualSize - 1]);
             // Adds individual fitness to average
             this.averageFitness += this.individuals[i].fitness;
+            if (this.individuals[i].fitness > this.bestFitness) {
+                this.bestFitness = this.individuals[i].fitness;
+            }
         }
         // Averages population's fitness
         this.averageFitness /= this.individuals.length;
+        if (this.previousBestFitness >= this.bestFitness) {
+            this.noImprovementCount++;
+        }
+        else {
+            this.noImprovementCount = 0;
+        }
         return this.individuals;
     }
     /**
@@ -67,7 +82,8 @@ export class PopulationTS extends Population {
      */
     mutate() {
         for (let i = 0; i < this.individualCount; i++) {
-            if (Math.random() < 0.1) {
+            const random = Math.random();
+            if (random < this.mutationRate) {
                 // Randomly picks two different indices
                 let [rand1, rand2] = [
                     Math.floor(Math.random() * this.individualSize),

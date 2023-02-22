@@ -1,16 +1,19 @@
-import { Population } from "../GA/index";
+import { Population } from "../../GA/index";
 import { IndividualTS } from "./IndividualTS";
 /**
- * Population representing solutions to the Traveling Salesman Problem
+ * Population representing solutions to the Travelling Salesman Problem
  */
 export declare class PopulationTS extends Population<IndividualTS> {
     cities: number[][];
+    noImprovementCount: number;
+    previousBestFitness: number;
+    averageFitnesses: number[];
     /**
      * Instantiates a new population to solve a set of cities
      * @param individualCount Number of individuals in the population
      * @param cities Set of cities coordinates to visit
      */
-    constructor(individualCount: number, cities: number[][]);
+    constructor(individualCount: number, cities: number[][], mutationRate: number);
     /**
      * Computes distance between two cities
      * @param id1 Index of first city

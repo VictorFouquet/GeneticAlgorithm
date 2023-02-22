@@ -6,13 +6,16 @@ export class Population {
      * Creates a new population
      * @param individualCount Number of individuals in the population
      * @param individualSize  Number of genes for each individual
+     * @param mutationRate    Probility for an individual to mutate
      * @param IndividualClass Individual class
      */
-    constructor(individualCount, individualSize, IndividualClass) {
+    constructor(individualCount, individualSize, mutationRate, IndividualClass) {
         this.individuals = [];
         this.individualCount = individualCount;
         this.individualSize = individualSize;
+        this.mutationRate = mutationRate;
         this.averageFitness = 0;
+        this.generation = 0;
         this.IndividualClass = IndividualClass;
     }
     /**
@@ -101,6 +104,7 @@ export class Population {
      * @returns all individuals from population
      */
     generate() {
+        this.generation++;
         // Computes individuals' fitness
         this.evaluate();
         // Creates offspring and add them to the population
@@ -108,6 +112,7 @@ export class Population {
         this.individuals.push(...offspring);
         // Evaluates population including offspring
         this.evaluate();
+        this.averageFitnesses.push(this.averageFitness);
         // Remove less fit individuals
         this.cull();
         // Mutate survivors

@@ -35,8 +35,7 @@ The solutions evolution and resolution of the problem can be interactively vizua
 
 ### Requirement
 
-node ^18.13.0
-npm  ^8.19.3
+```node``` and ```npm```
 
 ### Scripts
 

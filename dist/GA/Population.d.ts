@@ -7,8 +7,11 @@ export declare abstract class Population<T extends Individual<any>> implements _
     individuals: T[];
     individualCount: number;
     individualSize: number;
+    mutationRate: number;
     bestFitness: number;
     averageFitness: number;
+    averageFitnesses: number[];
+    generation: number;
     IndividualClass: {
         new (...args: any[]): T;
     };
@@ -16,9 +19,10 @@ export declare abstract class Population<T extends Individual<any>> implements _
      * Creates a new population
      * @param individualCount Number of individuals in the population
      * @param individualSize  Number of genes for each individual
+     * @param mutationRate    Probility for an individual to mutate
      * @param IndividualClass Individual class
      */
-    constructor(individualCount: number, individualSize: number, IndividualClass: {
+    constructor(individualCount: number, individualSize: number, mutationRate: number, IndividualClass: {
         new (...args: any[]): T;
     });
     /**
