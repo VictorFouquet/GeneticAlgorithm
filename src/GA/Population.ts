@@ -8,23 +8,34 @@ export abstract class Population<T extends Individual<any>>
            implements _Population<T> 
 {
     individuals:     T[];
-    individualCount: number
-    individualSize:  number
-    bestFitness:     number
-    averageFitness:  number
-    IndividualClass: { new(...args: any[]): T }
+    individualCount:  number
+    individualSize:   number
+    mutationRate:     number
+    bestFitness:      number
+    averageFitness:   number
+    averageFitnesses: number[]
+    generation:       number
+    IndividualClass:  { new(...args: any[]): T }
 
     /**
      * Creates a new population
      * @param individualCount Number of individuals in the population
      * @param individualSize  Number of genes for each individual
+     * @param mutationRate    Probility for an individual to mutate
      * @param IndividualClass Individual class
      */
-    constructor(individualCount: number, individualSize: number, IndividualClass: { new(...args: any[]): T }) {
+    constructor(
+        individualCount: number,
+        individualSize: number,
+        mutationRate: number,
+        IndividualClass: { new(...args: any[]): T }
+    ) {
         this.individuals     = [];
         this.individualCount = individualCount;
         this.individualSize  = individualSize;
+        this.mutationRate    = mutationRate;
         this.averageFitness  = 0;
+        this.generation      = 0;
         this.IndividualClass = IndividualClass;
     }
 
@@ -148,6 +159,7 @@ export abstract class Population<T extends Individual<any>>
      * @returns all individuals from population
      */
     generate(): T[] {
+        this.generation++;
         // Computes individuals' fitness
         this.evaluate();
         // Creates offspring and add them to the population
@@ -155,6 +167,7 @@ export abstract class Population<T extends Individual<any>>
         this.individuals.push(...offspring);
         // Evaluates population including offspring
         this.evaluate();
+        this.averageFitnesses.push(this.averageFitness);
         // Remove less fit individuals
         this.cull();
         // Mutate survivors
